@@ -1,3 +1,10 @@
+:root{
+    --gradiente_esfera: radial-gradient(circle, rgba(221,89,213,0.938813025210084) 10%, rgba(251,166,246,0.8687850140056023) 89%);
+    --gradiente_varde :radial-gradient(circle, rgba(89,221,95,0.938813025210084) 10%, rgba(166,251,169,0.8687850140056023) 89%);
+    --fondo_verde: rgb(89,221,95);
+    --gradiente_rojo:radial-gradient(circle, rgba(236,18,55,0.938813025210084) 14%, rgba(251,186,166,0.8687850140056023) 79%, rgba(249,28,35,1) 93%);
+}
+
 html{
     font-family: 'Open Sans', sans-serif;
     background: rgb(255,255,255);
@@ -19,6 +26,7 @@ body {
     z-index: -1;
     width: 60%;
     height: auto;
+
 }
 #camaraSelector-container {
     position: absolute;
@@ -36,8 +44,7 @@ body {
 #webcam {
     width: 100%;
     height: 100%;    
-    border: 0.5px solid #e010be;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 100%;
     overflow: hidden;
 }
@@ -64,8 +71,8 @@ body {
     color: white;
     cursor: pointer;
     pointer-events: none;
-    background: rgb(255,54,244);
-    background: radial-gradient(circle, rgba(255,54,244,1) 0%, rgba(193,22,174,1) 78%, rgba(177,15,160,1) 100%);
+    background:transparent;
+    background: var(--gradiente_esfera);
     border: 0.5px solid #000000;
     box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
 }
@@ -100,15 +107,15 @@ body {
 }
 
 .esfera.green {
-    background: rgb(95,255,54);
-    background: radial-gradient(circle, rgba(95,255,54,1) 9%, rgba(97,237,71,1) 66%, rgba(104,198,44,1) 100%);
+    background: var(--fondo_verde);
+    background: var(--gradiente_varde);
     border: 0.5px solid #000000;
     box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
 }
 
 .esfera.red {
     background: rgb(255,124,54);
-    background: radial-gradient(circle, rgba(255,124,54,1) 9%, rgba(237,71,91,1) 66%, rgba(198,44,44,1) 100%);
+    background: var(--gradiente_rojo); 
     border: 0.5px solid #000000;
     box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
 }

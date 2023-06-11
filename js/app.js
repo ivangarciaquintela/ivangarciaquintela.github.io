@@ -124,7 +124,7 @@ rejectButton.addEventListener('click', function() {
             if (selectedEsferaIndex === initialSelectedEsferaIndex) {
                 // Si todas las esferas han sido contestadas, mostrar un mensaje de finalización
                 if (allEsferasAnswered) {
-                    esfera.classList.remove('selected');
+                    selectedEsferaIndex.classList.remove('selected');
                 }
                 return; // No seleccionar ninguna esfera
             }
