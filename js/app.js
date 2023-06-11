@@ -57,27 +57,6 @@ esferas.forEach(function(esfera) {
 
 //#endregion : Esferas 
 
-//#region : Uso de webcam
-// Verificar si el navegador soporta la API de MediaDevices
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Obtener acceso a la webcam
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-            var video = document.getElementById('webcam');
-            video.srcObject = stream;
-            video.play();
-            video.style.display = 'block';
-                image.style.display = 'none';
-        })
-        .catch(function(error) {
-            console.error('Error al acceder a la webcam: ', error);
-            video.style.display = 'none';
-            image.style.display = 'block';
-        });
-} else {
-    console.error('La API de MediaDevices no es soportada por este navegador.');
-}
-//#endregion
 
 
 
@@ -90,7 +69,7 @@ var selectedEsferaIndex = 0;
 
 acceptButton.addEventListener('click', function() {
     var selectedEsfera = esferas[selectedEsferaIndex];
-
+    if(!esferas[selectedEsferaIndex].classList.contains('answered')){
     // Cambiar el color de la esfera a verde y marcarla como contestada
     selectedEsfera.classList.add('green');
     selectedEsfera.classList.add('answered');
@@ -98,6 +77,7 @@ acceptButton.addEventListener('click', function() {
 
     // Seleccionar la siguiente esfera no contestada
     selectNextAvailableEsfera();
+    }
 });
 
 rejectButton.addEventListener('click', function() {
@@ -144,7 +124,7 @@ rejectButton.addEventListener('click', function() {
             if (selectedEsferaIndex === initialSelectedEsferaIndex) {
                 // Si todas las esferas han sido contestadas, mostrar un mensaje de finalización
                 if (allEsferasAnswered) {
-                    alert("¡Finalizado!"); // Puedes cambiar esto por cualquier otra acción que desees realizar
+                    esfera.classList.remove('selected');
                 }
                 return; // No seleccionar ninguna esfera
             }
@@ -183,50 +163,46 @@ rejectButton.addEventListener('click', function() {
 //#endregion
 
 //#region : Control de la camara seleccionada
-    // Obtener referencia al select y al video
-    const cameraSelect = document.getElementById('camera-select');
-    const video = document.getElementById('video');
+var webcamElement = document.getElementById('webcam');
+var cameraSelectElement = document.getElementById('camera-select');
 
-    // Obtener la lista de dispositivos de video
-    navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-            // Filtrar solo los dispositivos de video
-            const videoDevices = devices.filter(device => device.kind === 'videoinput');
-            
-            // Recorrer los dispositivos y agregar opciones al select
-            videoDevices.forEach(device => {
-                const option = document.createElement('option');
-                option.value = device.deviceId;
-                option.text = device.label || `Cámara ${cameraSelect.options.length + 1}`;
-                cameraSelect.appendChild(option);
-            });
+// Obtener la lista de dispositivos de video disponibles
+navigator.mediaDevices.enumerateDevices().then(function(devices) {
+    var videoDevices = devices.filter(function(device) {
+        return device.kind === 'videoinput';
+    });
+
+    // Agregar las opciones del selector de cámaras
+    videoDevices.forEach(function(device) {
+        var option = document.createElement('option');
+        option.value = device.deviceId;
+        option.text = device.label || 'Cámara ' + (cameraSelectElement.options.length + 1);
+        cameraSelectElement.appendChild(option);
+    });
+
+    // Cambiar la fuente de video cuando se selecciona una cámara
+    cameraSelectElement.addEventListener('change', function() {
+        var selectedCamera = cameraSelectElement.value;
+
+      // Obtener las restricciones de la cámara seleccionada
+        var constraints = { video: { deviceId: selectedCamera } };
+
+      // Acceder a la cámara seleccionada
+        navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(stream) {
+            webcamElement.srcObject = stream;
+            cameraSelectElement.blur();
+            cameraSelectElement.style.display='none';
         })
-        .catch(error => {
-            console.error('Error al enumerar los dispositivos de video:', error);
+        .catch(function(error) {
+            console.log('Error al acceder a la cámara: ', error);
         });
+    });
+    })
+    .catch(function(error) {
+    console.log('Error al enumerar los dispositivos: ', error);
 
-    // Función para cambiar la cámara seleccionada
-    function changeCamera() {
-        const selectedCamera = cameraSelect.value;
-
-        // Obtener el stream actual del video
-        const stream = video.srcObject;
-        
-        // Detener el stream actual
-        if (stream) {
-            const tracks = stream.getTracks();
-            tracks.forEach(track => track.stop());
-        }
-
-        // Obtener el nuevo stream con la cámara seleccionada
-        navigator.mediaDevices.getUserMedia({ video: { deviceId: selectedCamera } })
-            .then(newStream => {
-                video.srcObject = newStream;
-            })
-            .catch(error => {
-                console.error('Error al cambiar la cámara:', error);
-            });
-        }
+});
 //#endregion
 
 //#region :keydown
