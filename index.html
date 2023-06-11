@@ -9,20 +9,16 @@
 
 </head>
 <body>
-    
-    
     <div id="webcam-container">
         <video id="webcam" autoplay></video>
     </div>
 
-    <div class="esferas-container" id="esferasContainer">
-
-    </div>
+    <div class="esferas-container" id="esferasContainer"></div>
     <div class="timer-esfera">
         <button id="timerButton">
             <div class="timer">300</div>
         </button>
- 
+
     </div>
     <div class="contador-palabras">
         <div id="contador">0</div>
@@ -30,22 +26,22 @@
 
     
     <div class="buttonsL">
-        <button id="rejectButton">
-            <img src="img/error.png" width="150" alt="Incorrecto">
+        <button id="rejectButton" >
         </button>
     </div>
     <div class="buttonsR">
         <button id="acceptButton">
-            <img src="img/valid.png" width="150" alt="Correcto">
         </button>
-
-      
-     
     </div>
     <div class="LogoThera">
+        
         <a href="https://www.theramex.com/es/" target="_blank">
             <img src="img/ico-theramex.ico" height="50" alt="Theramex ">
         </a>
+        <select id="camera-select" onchange="changeCamera()">
+            <option value="default">Cámara predeterminada</option>
+        </select>
+        <video id="video" autoplay></video>
     </div>
     <script src="js/app.js"></script>
 </body>
