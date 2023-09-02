@@ -24,7 +24,7 @@ var angleStep = (2 * Math.PI) / esferasCount;
 // Generar las esferas y posicionarlas en el contenedor
 for (var i = 0; i < esferasCount; i++) {
     var angle = -Math.PI / 2 + i * angleStep; // Comenzar en la posición de la letra A (-Math.PI / 2)
-    var radius = 350; /* Ajusta el radio del círculo */
+    var radius = 400; /* Ajusta el radio del círculo */
 
     var x = Math.cos(angle) * radius;
     var y = Math.sin(angle) * radius;
@@ -164,6 +164,9 @@ rejectButton.addEventListener('click', function() {
 
 //#region : Control de la camara seleccionada
 var webcamElement = document.getElementById('webcam');
+var webcamContainer = document.getElementById('webcam-container');
+var imgContainer = document.getElementById('bannerLogo');
+
 var cameraSelectElement = document.getElementById('camera-select');
 
 // Obtener la lista de dispositivos de video disponibles
@@ -193,6 +196,8 @@ navigator.mediaDevices.enumerateDevices().then(function(devices) {
             webcamElement.srcObject = stream;
             cameraSelectElement.blur();
             cameraSelectElement.style.display='none';
+            webcamContainer.style.display='block'
+            imgContainer.style.display='none'
         })
         .catch(function(error) {
             console.log('Error al acceder a la cámara: ', error);
