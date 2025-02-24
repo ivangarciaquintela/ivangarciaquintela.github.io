@@ -1,7 +1,7 @@
 
 /* Estilos personalizados */
 .imagen-lateral {
-    background-image: url('../img/profile.jpg');
+    background-image: url('../img/profile2.jpg');
     background-size: cover;
     background-position: center;
     opacity: 0;
@@ -186,7 +186,7 @@
 .animate-trayectoria .trayectoria-item {
     opacity: 0;
     transform: translateX(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.75s ease;
 }
 
 .animate-trayectoria .trayectoria-item.item-visible {

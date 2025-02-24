@@ -3,19 +3,92 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ivan García Quintela</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-
-    <!-- Font Awesome (para los iconos) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href = "./css/styles.css"/>
+    <link rel="stylesheet" href="./css/styles.css" />
     <script src="./js/app.js"></script>
 
+    <!-- Agrega esto en el head para el estilo del toggle -->
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        /* Colores del toggle */
+        input:checked + .slider {
+          background-color: #000;  /* Color cuando esta en ON (puedes cambiarlo) */
+        }
+        
+        input:focus + .slider {
+          box-shadow: 0 0 1px #000; /* Opcional:  Un sombreado al hacer focus */
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Texto ES/EN */
+        .slider:after {
+            content: 'ES';
+            color: white;
+            display: block;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 70%;  /* Ajusta la posicion del texto */
+            font-size: 10px;
+            font-family: Verdana, sans-serif;
+        }
+
+        input:checked+.slider:after {
+            content: 'EN';
+            left: 30%; /*Ajusta la posicion del texto*/
+        }
+    </style>
 </head>
 
 <body class="font-sans">
@@ -27,12 +100,20 @@
 
         <!-- Right Column (Content) -->
         <div class="w-full md:w-4/5 flex flex-col">
-            <!-- Animated Greeting -->
-            <div id="greeting" class="p-4 md:p-6"></div> <!-- Padding adjusted -->
+            <!-- Animated Greeting and Toggle Button -->
+            <div class="p-4 md:p-6 flex justify-between items-center">
+                <div id="greeting"></div>
+                <!-- Toggle Button -->
+                <label class="switch">
+                    <input type="checkbox" id="language-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
 
             <!-- Navigation Menu -->
             <nav class="bg-gray-100 p-3 mx-5">
-                <ul class="flex space-x-4 md:space-x-8 justify-center"> <!-- space-x adjusted -->
+                <ul class="flex space-x-4 md:space-x-8 justify-center">
                     <li><a href="#" class="text-gray-500 hover:text-black menu-item active"
                             onclick="mostrarContenido('about'); return false;">ABOUT ME</a></li>
                     <li><a href="#" class="text-gray-500 hover:text-black menu-item"
@@ -44,23 +125,42 @@
 
 
             <!-- Main Content -->
-            <div class="p-4 md:p-6 flex-grow" id="contenido"> <!-- Padding adjusted -->
+            <div class="p-4 md:p-6 flex-grow" id="contenido">
                 <!-- About Section -->
                 <div id="about" class="contenido-seccion">
                     <div class="flex items-center mb-4">
                         <h2 class="text-2xl font-bold">Ivan García Quintela</h2>
                         <div class="bio-icons ml-4">
-                            <a href="https://www.linkedin.com/in/ivangarciaquintela" target="_blank" aria-label="LinkedIn"><i
-                                    class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/ivangarciaquintela" target="_blank" aria-label="GitHub"><i
-                                    class="fab fa-github"></i></a>
-                            <a href="mailto:igarciaquintela@hotmail.com" aria-label="Correo Electrónico"><i
-                                    class="fas fa-envelope"></i></a>
+                            <a href="https://www.linkedin.com/in/ivangarciaquintela" target="_blank"
+                                aria-label="LinkedIn">
+                                <i alt="LinkedIn" class="fab fa-linkedin text-gray-800 "></i></a>
+                            <a href="https://github.com/ivangarciaquintela" alt="GitHub" target="_blank"
+                                aria-label="GitHub">
+                                <i class="fab fa-github text-gray-800 "></i></a>
+                            <a href="mailto:igarciaquintela@hotmail.com" aria-label="Correo Electrónico">
+                                <i alt="Mail" class="fas fa-envelope text-gray-800 "></i></a>
+                            <a href="/img/cv.pdf" aria-label="Descargar PDF" download="Curriculum_Ivan_Garcia.pdf">
+                                <i alt="CV PDF" class="fas fa-file-pdf text-gray-800"></i>
+                            </a>
                         </div>
                     </div>
 
                     <div class="bio-container">
-                        <p class="bio-text text-gray-700 leading-relaxed">
+                        <p id="en-bio" class="bio-text text-gray-700 leading-relaxed">
+                            
+                            Higher Technician in Multiplatform Application Development and currently pursuing a Bachelor's Degree in Computer Engineering at the University of A Coruña. I am seeking an opportunity to apply my knowledge in software development and contribute to a challenging and constantly evolving work environment.
+                            <br><br>
+                            Throughout my education, I have acquired a solid foundation in Python, Java, SQL, HTML, CSS, etc. My professional experience is focused on development with .NET, C#, and SQL Server.
+                            <br><br>
+                            I am an active member of the technology community, and I enjoy participating in hackathons, attending talks, and programming events to continue learning and meeting people in the industry.
+                            <br><br>
+                            I am a proactive, communicative individual with a high capacity for adaptation. I enjoy collaborating in multidisciplinary teams and contributing ideas. In my group work experiences, I have facilitated communication between team members, proposed solutions to challenges, and shared my knowledge with my colleagues.
+                            <br><br>
+                            I am constantly learning and actively seeking new tools and methodologies to improve my development skills and create high-quality software.
+                            <br><br>
+                        </p>
+
+                        <p id="es-bio" class="bio-text text-gray-700 leading-relaxed hidden">
                             Técnico Superior en Desarrollo de Aplicaciones Multiplataforma y actualmente cursando el
                             Grado de Ingeniería Informática en la Universidad de A Coruña. Busco una oportunidad para
                             aplicar mis conocimientos en desarrollo de software y contribuir a un entorno de trabajo
@@ -100,6 +200,12 @@
                                     <p class="text-gray-700 px-5 italic">(CIFP Rodolfo Ucha, Ferrol)</p>
                                     <p class="text-gray-800 px-6 italic">2021</p>
                                 </li>
+
+                                <li>
+                                    <p>Anglia English B2 Certification</p> 
+                                    <p class="text-gray-700 px-5 italic">(Anglia)</p>
+                                    <p class="text-gray-700 px-6 italic">2021</p>
+                                </li>
                                 <li>
                                     <p>Degree in Computer Engineering</p>
                                     <p class="text-gray-700 px-5 italic">(University of A Coruña, A Coruña)</p>
@@ -124,9 +230,9 @@
 
                 <!-- Skills Section -->
                 <div id="skills" class="contenido-seccion hidden">
-                   <div class="flex flex-col space-y-8"> <!-- Contenedor para las secciones -->
-                        <!-- Backend Skills -->
-                        <div class="skills-section">
+                    <div class="flex flex-col space-y-8">
+                        <!-- skills content... -->
+                         <div class="skills-section">
                             <h3>Backend</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="skill-item">
@@ -384,6 +490,52 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('language-toggle');
+            const esBio = document.getElementById('es-bio');
+            const enBio = document.getElementById('en-bio');
+
+            // Funcion para actualizar las biografias
+            function updateBioVisibility() {
+                if (toggle.checked) {
+                  esBio.classList.add('hidden');
+                  enBio.classList.remove('hidden');
+                } else {
+                  enBio.classList.add('hidden');
+                  esBio.classList.remove('hidden');
+                }
+            }
+
+            //Comprobar el estado inicial del checkbox, por si se recarga
+            //la página
+            updateBioVisibility();
+
+            // Escuchar el cambio de estado del toggle
+            toggle.addEventListener('change', updateBioVisibility);
+
+            //El resto del codigo, si tienes, puede ir aqui.
+            //Por ejemplo, función mostrarContenido...
+            function mostrarContenido(id) {
+              // Oculta todas las secciones
+              document.querySelectorAll('.contenido-seccion').forEach(seccion => {
+                  seccion.classList.add('hidden');
+              });
+
+              //Muestra la sección seleccionada
+              document.getElementById(id).classList.remove('hidden');
+
+              //Remueve las clases activas del menu
+              document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+              });
+    
+              //Activa la clase del menu clickado
+              event.target.classList.add('active');
+            }
+});
+    </script>
 </body>
 
 </html>

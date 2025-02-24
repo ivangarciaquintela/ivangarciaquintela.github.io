@@ -30,7 +30,7 @@
 
             //Animar los elementos
             trayectoriaContainer.classList.add('animate-trayectoria');
-            let delay = 0;
+            let delay = 500;
             items.forEach((item) => {
                 // Reseteamos la animación en cada elemento antes de volver a aplicarla
                 item.classList.remove('item-visible');
