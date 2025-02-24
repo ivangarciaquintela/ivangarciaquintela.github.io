@@ -1,60 +1,397 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,400,600,900">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página con Tailwind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Pasapalabra</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
-</head>
-<body>
-    <div id="webcam-container">
-        <video id="webcam" autoplay></video>
-    </div>
-
-    <div id="image-container" >
-        <img id="bannerLogo" src="img/BannerLogo.png" height="350">
-    </div>
-    
-
-    <div class="esferas-container" id="esferasContainer"></div>
-   
-
-    <div id="contenedorContador">
-        <div class="timer-esfera">
-            <button id="timerButton">
-                <div class="timer">300</div>
-            </button>
-    
-        </div>
-
-        <div class="contador-palabras">
-            <div id="contador">0</div>
-        </div>
-
-
-    </div>
-    
-    <div class="buttonsL">
-        <button id="rejectButton" >
-        </button>
-    </div>
-    <div class="buttonsR">
-        <button id="acceptButton">
-        </button>
-    </div>
-    <div class="LogoThera">
-        
-        <a href="https://www.theramex.com/es/" target="_blank">
-            <img src="img/ico-theramex.ico" height="150" alt="Theramex ">
-        </a>
-        <select id="camera-select" onchange="changeCamera()">
-            <option value="default">Cámara predeterminada</option>
-        </select>
-    </div>
+    <!-- Font Awesome (para los iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href = "css/styles.css"/>
     <script src="js/app.js"></script>
-</body>
+    
+</head>
 
+<body class="font-sans">
+
+    <div class="flex contenedor-principal h-screen">
+
+        <!-- Left Column (Image) -->
+        <div class="w-1/5 imagen-lateral mx-2 hidden md:block"></div> <!-- Hidden on small screens -->
+
+        <!-- Right Column (Content) -->
+        <div class="w-full md:w-4/5 flex flex-col">
+            <!-- Animated Greeting -->
+            <div id="greeting" class="p-4 md:p-6"></div> <!-- Padding adjusted -->
+
+            <!-- Navigation Menu -->
+            <nav class="bg-gray-100 p-3 mx-5">
+                <ul class="flex space-x-4 md:space-x-8 justify-center"> <!-- space-x adjusted -->
+                    <li><a href="#" class="text-gray-500 hover:text-black menu-item active"
+                            onclick="mostrarContenido('about'); return false;">ABOUT ME</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-black menu-item"
+                            onclick="mostrarContenido('trayectoria'); return false;">CARREER</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-black menu-item"
+                            onclick="mostrarContenido('skills'); return false;">SKILLS</a></li>
+                </ul>
+            </nav>
+
+
+            <!-- Main Content -->
+            <div class="p-4 md:p-6 flex-grow" id="contenido"> <!-- Padding adjusted -->
+                <!-- About Section -->
+                <div id="about" class="contenido-seccion">
+                    <div class="flex items-center mb-4">
+                        <h2 class="text-2xl font-bold">Ivan García Quintela</h2>
+                        <div class="bio-icons ml-4">
+                            <a href="https://www.linkedin.com/in/ivangarciaquintela" target="_blank" aria-label="LinkedIn"><i
+                                    class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com/ivangarciaquintela" target="_blank" aria-label="GitHub"><i
+                                    class="fab fa-github"></i></a>
+                            <a href="mailto:igarciaquintela@hotmail.com" aria-label="Correo Electrónico"><i
+                                    class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="bio-container">
+                        <p class="bio-text text-gray-700 leading-relaxed">
+                            Técnico Superior en Desarrollo de Aplicaciones Multiplataforma y actualmente cursando el
+                            Grado de Ingeniería Informática en la Universidad de A Coruña. Busco una oportunidad para
+                            aplicar mis conocimientos en desarrollo de software y contribuir a un entorno de trabajo
+                            desafiante y en constante evolución.<br><br>
+
+                            A lo largo de mi formación, he adquirido sólidos conocimientos en Python, Java, SQL, HTML,
+                            CSS, etc. Mi experiencia profesional se centra en el desarrollo con .NET, C# y SQL
+                            Server.<br><br>
+
+                            Soy un miembro activo de la comunidad tecnológica, y de forma autodidacta me gusta participar
+                            en hackathons, asisto a charlas y eventos de programación para seguir formándome y
+                            conociendo gente del sector.<br><br>
+
+                            Soy una persona proactiva, comunicativa y con gran capacidad de adaptación. Disfruto
+                            colaborando en equipos multidisciplinarios y aportando ideas. En mis experiencias de trabajo
+                            en grupo, he facilitado la comunicación entre miembros del equipo, propuesto soluciones ante
+                            desafíos y compartido mis conocimientos con mis compañeros.<br><br>
+
+                            Estoy en constante aprendizaje y busco activamente nuevas herramientas y metodologías para
+                            mejorar mis habilidades de desarrollo y crear software de alta calidad.
+                        </p>
+                        
+                    </div>
+                </div>
+
+                <!-- Career Section -->
+                <div id="trayectoria" class="contenido-seccion hidden">
+                    <h2 class="text-2xl font-bold mb-4">CARREER</h2>
+                    <div class="trayectoria-container">
+                        <div class="trayectoria-line"></div>
+                        <!-- Education -->
+                        <div class="trayectoria-item">
+                            <h3 class="text-xl font-bold mb-2">Education</h3>
+                            <ul>
+                                <li>
+                                    <p>Higher Vocational Training in Multiplatform Application Development</p>
+                                    <p class="text-gray-700 px-5 italic">(CIFP Rodolfo Ucha, Ferrol)</p>
+                                    <p class="text-gray-800 px-6 italic">2021</p>
+                                </li>
+                                <li>
+                                    <p>Degree in Computer Engineering</p>
+                                    <p class="text-gray-700 px-5 italic">(University of A Coruña, A Coruña)</p>
+                                    <p class="text-gray-800 px-6 italic">Currently studying...</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Work Experience -->
+                        <div class="trayectoria-item">
+                            <h3 class="text-xl font-bold mb-2">Work Experience</h3>
+                            <ul>
+                                <li>
+                                    <p><a href="https://gtartabria.es/index.php/es/">Grupo Tecnológico Artabria</a></p>
+                                    <p class="text-gray-700 px-5 italic">(Ferrol)</p>
+                                    <p class="text-gray-800 px-6 italic">Jan. 2021 - Oct. 2024</p>
+                                    <p class="text-gray-900 px-7 italic">.NET Full Stack Developer</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div id="skills" class="contenido-seccion hidden">
+                    <!-- Backend Skills -->
+                    <div class="skills-section">
+                        <h3>Backend</h3>
+                        <div class="skills-container">
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-csharp-plain skill-icon"></i>
+                                    <div class="skill-name">C#</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-dot-net-plain skill-icon"></i>
+                                    <div class="skill-name">.NET</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-mysql-plain skill-icon"></i>
+                                    <div class="skill-name">MySQL</div>
+                                </div>
+
+                                <div class="skill-level professional">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-java-plain skill-icon"></i>
+                                    <div class="skill-name">Java</div>
+                                </div>
+                                <div class="skill-level">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <!-- C++ -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-cplusplus-plain skill-icon"></i>
+                                    <div class="skill-name">C++</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot "></span>
+                                    <span class="skill-dot "></span>
+                                </div>
+                            </div>
+
+                            <!-- C -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-c-plain skill-icon"></i>
+                                    <div class="skill-name">C</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot "></span>
+                                    <span class="skill-dot "></span>
+                                </div>
+                            </div>
+                            <!-- Python -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-python-plain skill-icon"></i>
+                                    <div class="skill-name">Python</div>
+                                </div>
+                                <div class="skill-level professional">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot "></span>
+                                </div>
+                            </div>
+
+                            <!-- Android -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-android-plain skill-icon"></i>
+                                    <div class="skill-name">Android</div>
+                                </div>
+                                <div class="skill-level begginer">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                    <span class="skill-dot"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+
+                            <!-- Flutter -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-flutter-plain skill-icon"></i>
+                                    <div class="skill-name">Flutter</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <!-- SQL Developer -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                     <!--  No standard Devicon for SQL Developer; using generic database icon -->
+                                    <i class="fas fa-database skill-icon"></i>
+                                    <div class="skill-name">SQL Developer</div>
+                                </div>
+                                <div class="skill-level professional">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- Frontend Skills -->
+                    <div class="skills-section">
+                        <h3>Frontend</h3>
+                        <div class="skills-container">
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-javascript-plain skill-icon"></i>
+                                    <div class="skill-name">JavaScript</div>
+                                </div>
+                                <div class="skill-level professional">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-html5-plain skill-icon"></i>
+                                    <div class="skill-name">HTML</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-css3-plain skill-icon"></i>
+                                    <div class="skill-name">CSS</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                              <!-- Tailwind CSS -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-tailwindcss-plain skill-icon"></i>
+                                    <div class="skill-name">Tailwind CSS</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Skills -->
+                    <div class="skills-section">
+                        <h3>Others</h3>
+                        <div class="skills-container">
+                            <!-- Docker -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-docker-plain skill-icon"></i>
+                                    <div class="skill-name">Docker</div>
+                                </div>
+                                <div class="skill-level advanced">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+
+                            <!-- Azure -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                     <!--  No standard Devicon for Azure; using a generic cloud icon -->
+                                    <i class="fas fa-cloud skill-icon"></i>
+                                    <div class="skill-name">Azure</div>
+                                </div>
+                                <div class="skill-level begginer">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+
+                            <!-- Git -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <i class="devicon-git-plain skill-icon"></i>
+                                    <div class="skill-name">Git</div>
+                                </div>
+                                <div class="skill-level professional">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+
+                            <!-- Azure Repo -->
+                            <div class="skill-item">
+                                <div class="skill-name-container">
+                                    <!--  No standard Devicon for Azure Repos; using a generic repository icon -->
+                                     <i class="fas fa-code-branch skill-icon"></i>
+
+                                    <div class="skill-name">Azure Repo</div>
+                                </div>
+                                <div class="skill-level professional">
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot active"></span>
+                                    <span class="skill-dot"></span>
+                                    <span class="skill-dot"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
 
 </html>

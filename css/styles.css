@@ -1,239 +1,301 @@
-:root{
-    --gradiente_esfera: radial-gradient(circle, rgba(221,89,213,0.938813025210084) 10%, rgba(251,166,246,0.8687850140056023) 89%);
-    --gradiente_varde :radial-gradient(circle, rgba(89,221,95,0.938813025210084) 10%, rgba(166,251,169,0.8687850140056023) 89%);
-    --fondo_verde: rgb(89,221,95);
-    --gradiente_rojo:radial-gradient(circle, rgba(236,18,55,0.938813025210084) 14%, rgba(251,186,166,0.8687850140056023) 79%, rgba(249,28,35,1) 93%);
+
+/* Estilos personalizados */
+.imagen-lateral {
+    background-image: url('../img/profile.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    /* Inicialmente transparente */
+    animation: fadeInImage 5s forwards;
+    /* Animación al cargar */
 }
 
-html{
-    font-family: 'Open Sans', sans-serif;
-    background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,0.76234243697479) 17%, rgba(240,170,236,0.6811099439775911) 51%, rgba(221,62,212,0.6194852941176471) 96%);
-min-width: 50%;
-}
-body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    min-width: 50%;
-    min-height: 50%;
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
-#webcam-container {
+/*Muy importante quitar height*/
+.contenedor-principal {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    /* height: 90vh; Quitamos el alto fijo */
+}
+
+.menu-item {
+    position: relative;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.menu-item::after {
+    content: '';
     position: absolute;
-    z-index: -1;
-    width: 60%;
-    height: auto;
-    display: none;
-
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease;
 }
 
-#image-container{
-    display:flex;
-    position: absolute;
-    z-index: -1;
-    height: auto;
-    border-radius: 100%;
-    justify-content: center;    
-    align-items: center;
-}
-#bannerLogo{
-border-radius: 100%;
-
-}
-#camaraSelector-container {
-    position: absolute;
-    top: 0%;
-    left: 0px;
-    width: 200px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-
-#webcam {
+.menu-item.active::after {
     width: 100%;
-    height: 100%;    
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 100%;
-    overflow: hidden;
-    transform: scaleX(-1);
 }
 
-
-
-.esferas-container {
-    position: absolute;
-    width: auto;
-    height: auto;
-    top:10%;
-    left:30%;
-    
-    
+.menu-item.active {
+    width: 100%;
+    font-size: 1.25rem;
+    color: black;
 }
 
-.esfera {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight:bolder;
-    font-size: 60px;
-    color: white;
-    cursor: pointer;
-    pointer-events: none;
-    background:transparent;
-    background: var(--gradiente_esfera);
-    border: 0.5px solid #000000;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
-}
-
-
-.timer-esfera {
-
-    transform: translateY(-50%);
-    width: 70%;
-    height: 70%;
-    min-height: 150px!important;
-    min-width: 200px!important;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40%;
-    margin-bottom: 0%;
-    border-radius: 50%;
-    background: rgb(255,54,244);
-    background: radial-gradient(circle, rgba(255,54,244,1) 0%, rgba(193,22,174,1) 78%, rgba(177,15,160,1) 100%);
-    border: 0.5px solid #000000;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 60px;
-    color: white;
-
-}
-@keyframes blink-animation {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-}
-.esfera.selected {
-    animation: blink-animation 1s infinite;
-}
-
-.esfera.green {
-    background: var(--fondo_verde);
-    background: var(--gradiente_varde);
-    border: 0.5px solid #000000;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
-}
-
-.esfera.red {
-    background: rgb(255,124,54);
-    background: var(--gradiente_rojo); 
-    border: 0.5px solid #000000;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
-}
-button
-{
+/* Importante: Estilos para el scroll individual */
+.contenido-seccion {
     opacity: 1;
-    background-color: transparent;
-    box-shadow: none;
-    border: none;
-    color: white;
+    transition: opacity 0.5s ease;
+    visibility: visible;
+    max-height: 70vh;
+    /* Altura máxima antes de que aparezca el scroll.  Ajusta según necesites. */
+    overflow-y: auto;
+    /* Habilita el scroll vertical */
+    padding-right: 1rem;
+    /* Para evitar que el contenido se solape con la barra de scroll */
+
 }
 
-.buttonsL {
-    position: absolute;
-    top: 80%;
-    left: 20px;
-    width: 200px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-.buttonsR {
+.contenido-seccion.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition-delay: 0s;
+    max-height: 0;
+    /* Importante para ocultar completamente */
+    overflow-y: hidden;
+    /* Evita scroll cuando está oculto */
 
-    position: absolute;
-    top: 80%;
-    right: 20px;
-    width: 200px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-.LogoThera {
-    position: absolute;
-    top: 10%;
-    right: 100px;
-    width: 200px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction:column;
 }
 
+.contenido-seccion.fade-in {
+    visibility: visible;
+    transition-delay: 0.5s;
+}
 
-
-.timer {
-    font-size: 70px;
+#greeting {
+    font-size: 3.5rem;
     font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    background: none;
-    opacity: 10;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
 }
 
-#contador {
-    font-size: 60px;
-    font-weight: bold;
-    text-align: center;
-
-}
-#contenedorContador{
-    height: 40%;
-    width: 20%;
-    min-height: 300px!important;
-    min-width: 150px!important;
-    position : absolute;
-    left:2%;
-    bottom: 15%;
-    display: table-column;
-    align-items: center;
-    justify-content: center;
-
-
-}
-.contador-palabras {
-
-
-    transform: translateY(-50%);
-    width: 100%;
-    height: 25%;
-    min-width: 200px;
-    min-height: 100px;
-    background: rgb(208,59,245);
-    background: radial-gradient(circle, rgba(208,59,245,1) 9%, rgba(221,62,212,1) 66%, rgba(198,44,189,1) 100%);border: 0.5px solid #000000;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.5px #ffffff;
+.bio-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    flex-direction: column;
+    gap: 1rem;
 }
+
+.bio-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    /*Centrar verticalmente*/
+    justify-content: flex-start;
+    /*Alinear en un lado*/
+}
+
+.bio-icons a {
+    color: #333;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    /*Para centrado vertical con padding y transform*/
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    /*Ancho fijo para hacerlos circulares*/
+    height: 40px;
+    /*Alto fijo para hacerlos circulares*/
+    border-radius: 50%;
+
+}
+
+.bio-icons a:hover {
+    color: #0077b5;
+}
+
+.bio-icons a:hover i {
+    transform: scale(1.1);
+
+
+}
+
+.bio-text {
+    max-width: 80%;
+
+}
+
+.trayectoria-container {
+    position: relative;
+    padding-left: 2rem;
+    /* padding-right: 2rem; Ajuste para separarlo*/
+}
+
+.trayectoria-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    background-color: black;
+    height: 0;
+    transition: height 1s ease;
+}
+
+.trayectoria-line.line-complete {
+    height: 100%;
+}
+
+/*Para resetear la animacion*/
+.trayectoria-line.reset-animation {
+    height: 0;
+    transition: none;
+    /*Muy importante desactivar la transicion*/
+}
+
+.trayectoria-item {
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.trayectoria-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+    transform: translateY(0%);
+}
+
+.animate-trayectoria .trayectoria-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-trayectoria .trayectoria-item.item-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/*Para resetear animacion, desactivamos la transicion, y ponemos valores iniciales*/
+.animate-trayectoria .trayectoria-item.reset-animation {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: none;
+}
+
+
+.skill-item {
+    margin-bottom: 1rem;
+    /* Espacio entre items */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Distribuye el espacio */
+
+}
+
+.skill-name-container {
+    display: flex;
+    align-items: center;
+    /* Alinea verticalmente el icono y el texto */
+}
+
+
+.skill-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    /*Más importante en este caso*/
+
+}
+
+.skill-name {
+    font-weight: bold;
+}
+
+
+
+.skill-level {
+    display: flex;
+    align-items: center;
+}
+
+.skill-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #cbd5e0;
+    /* Color gris claro para puntos inactivos */
+    margin-right: 6px;
+    /* Espacio entre puntos */
+    display: inline-block;
+    /* Para que los puntos estén en línea */
+}
+
+.skill-dot.active {
+    background-color: #2d3748;
+    /* Color más oscuro para puntos activos */
+}
+
+/* Estilos para los contenedores de skills */
+.skills-section {
+    margin-bottom: 2rem;
+    /* Espacio entre secciones */
+}
+
+.skills-section h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    /* Espacio debajo del título */
+    border-bottom: 2px solid #2d3748;
+    /* Línea debajo del título */
+    padding-bottom: 0.5rem;
+    /* Espacio entre la línea y el texto */
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columnas */
+    gap: 2rem;
+    /* Espacio entre columnas y filas */
+    padding: 1rem;
+    /* padding-right: 2rem;  Ajuste para el scroll, evitar overlap */
+}
+
+/*Clases para los niveles*/
+
+.begginer .skill-dot:nth-child(1) {
+    background-color: #2d3748;
+}
+.advanced .skill-dot:nth-child(-n+2) {
+    background-color: #2d3748;
+}
+
+.professional .skill-dot:nth-child(-n+3) {
+    background-color: #2d3748;
+}
+
+.expert .skill-dot:nth-child(-n+4) {
+    background-color: #2d3748;
+}
+
+
