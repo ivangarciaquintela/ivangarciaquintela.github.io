@@ -5,9 +5,7 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    /* Inicialmente transparente */
     animation: fadeInImage 5s forwards;
-    /* Animación al cargar */
 }
 
 @keyframes fadeInImage {
