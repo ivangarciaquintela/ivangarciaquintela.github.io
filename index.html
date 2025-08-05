@@ -120,6 +120,8 @@
                             onclick="mostrarContenido('trayectoria'); return false;">CARREER</a></li>
                     <li><a href="#" class="text-gray-500 hover:text-black menu-item"
                             onclick="mostrarContenido('skills'); return false;">SKILLS</a></li>
+                    <li><a href="#" class="text-gray-500 hover:text-black menu-item"
+                            onclick="mostrarContenido('portfolio'); return false;">PORTFOLIO</a></li>
                 </ul>
             </nav>
 
@@ -486,6 +488,73 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Portfolio Section -->
+                <div id="portfolio" class="contenido-seccion hidden">
+                    <h2 class="text-2xl font-bold mb-4">PORTFOLIO</h2>
+                    <p class="text-gray-700 mb-6">Here are some of my projects:</p>
+
+                    <!-- Subcategoría -->
+                    <details class="mb-4 group">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-600 mb-2 group-open:mb-4">Apps</summary>
+
+                        <a href="https://devpost.com/software/cmatch" target="_blank" class="block mb-4">
+                        <div class="flex justify-between items-stretch bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                            <div class="p-4 flex-1">
+                                <h3 class="font-bold text-xl mb-1">cMatch</h3>
+                                <p class="italic bold text-gray-500">HACKUDC 2025.</p>
+
+                                <p class="italic text-gray-400 pr-20">Un sistema de búsqueda y recomendación de moda que aprovecha la similitud visual y textual, integrándose con las APIs de Inditex para proporcionar un descubrimiento y gestión de prendas de ropa.</p>
+                            
+                                <p class="text-sm text-blue-700 mt-2">Python, JavaScript, HTML, CSS, FastAPI, PostgreSQL, Docker</p>   
+                            </div>
+                            <img src="img/cMatch.png" alt="cMatch" class="w-40 object-cover object-center"/>
+                        </div>
+                        </a> 
+                        
+                        <a href="https://devpost.com/software/skillhub" target="_blank" class="block mb-4">
+                        <div class="flex justify-between items-stretch bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                            <div class="p-4 flex-1">
+                                <h3 class="font-bold text-xl mb-1">SkillHub</h3>
+                                <p class="italic bold text-gray-500">HACKUDC 2025.</p>
+
+                                <p class="italic text-gray-400 pr-20">Un sistema de gestión y consulta de hard y soft skills, que permite poner en contacto y compartir experiencia profesional y habilidades entre miembros de una organización.</p>
+                                <p class="text-sm text-blue-700 mt-2">Python, SQL, Docker, FastAPI, alpine.js, HTML, CSS, Docker, SQL.</p>   
+                            </div>
+                            <img src="img/skillHub.png" alt="cMatch" class="w-40 object-cover object-center"/>
+                        </div>
+                        </a> 
+                        <a href="https://devpost.com/software/disaform" target="_blank" class="block mb-4">
+                        <div class="flex justify-between items-stretch bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                            <div class="p-4 flex-1">
+                                <h3 class="font-bold text-xl mb-1">DisaForm</h3>
+                                <p class="italic bold text-gray-500">HACKUDC 2024.</p>
+                                <p class="italic text-gray-400 pr-20">DisaForm es una aplicación multiplataforma desarrollada en Flutter que permite rellenar y consultar formularios dinámicos proporcionados por la API de Disashop.</p>
+                                <p class="text-sm text-blue-700 mt-2">Flutter, Dart</p>
+                            </div>
+                            <img src="img/disaForm.png" alt="disaForm" class="w-40 object-cover object-center"/>
+                        </div>
+                        </a>    
+                    </details>
+                    
+
+                    <details class="mb-4 group">
+                        <summary class="cursor-pointer text-lg font-semibold text-gray-600 mb-2 group-open:mb-4">Games</summary>
+
+                        <a href="https://github.com/ivangarciaquintela/S-S" target="_blank" class="block mb-4">
+                        <div class="flex justify-between items-stretch bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                            <div class="p-4 flex-1">
+                                <h3 class="font-bold text-xl mb-1">S&S</h3>
+                                <p class="italic bold text-gray-500">Skelly & Soulie.</p>
+                                <p class="italic text-gray-400 pr-20">Un juego de plataformas en 2D que combina mecánicas exploración y acción, donde un esqueleto regresa del otro mundo y junto su alma comienzan una aventura en busca sus órganos robados.</p>
+                                <p class="text-sm text-blue-700 mt-2">PyGame, Python</p>
+                            </div>
+                            <img src="img/skelly.png" alt="S&S" class="w-40 object-cover object-center"/>
+                        </div>
+                        </a>
+                    </details>
+
                 </div>
             </div>
         </div>
